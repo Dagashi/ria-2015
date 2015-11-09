@@ -1,5 +1,6 @@
 var React = require("react");
 var TopStats = require("./topstats");
+var ProjectsWidget = require("./projectswidget");
 
 var Home = React.createClass({
 	render: function(){
@@ -24,6 +25,7 @@ var Home = React.createClass({
 						</div>
 					</div>
 				</div>
+				<div className="clearfix"></div>
 
 				<div className="row top_tiles">
 					<TopStats icon="fa-comments-o" count="12" title="New Messages" tooltip="Go to Messages" actionGlyph="arrow-right" action="#" >From your co-workers.</TopStats>
@@ -32,8 +34,8 @@ var Home = React.createClass({
 					<TopStats icon="fa-exclamation-triangle" count="2" title="Urgent">Notifications or bug-tickets with urgent status.</TopStats>
 				</div>
 
-				
-				
+				<ProjectsWidget />
+
 				<div className="clearfix"></div>
 			</div>
 		);
