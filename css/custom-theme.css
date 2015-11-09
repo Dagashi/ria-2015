@@ -365,7 +365,7 @@ dark,
 
 .navbar-brand,
 .navbar-nav>li>a {
-	margin-bottom: 5px
+	/*margin-bottom: 5px*/
 }
 
 body {
@@ -613,7 +613,8 @@ a:focus {
 }
 
 .navbar {
-	margin-bottom: 0
+	margin-bottom: 0;
+	min-height: 30px;
 }
 
 .navbar-header {
@@ -636,7 +637,21 @@ a:focus {
 }
 
 .top_nav .dropdown-menu {
-	min-width: 220px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	background: transparent;
+	-webkit-border-radius: 0 0 0 0;
+	border-radius: 0 0 0 0;
+	border: none;
+}
+
+.top_nav .dropdown-menu.open a {
+	background: transparent !important;
+}
+
+.top_nav .dropdown-menu:after {
+	border: none !important;
+	content: "" !important;
 }
 
 .top_nav .dropdown-menu li {
@@ -650,6 +665,26 @@ a:focus {
 
 .top_nav li a i {
 	font-size: 15px
+}
+
+.top_nav .top-notifications {
+	text-align: right;
+}
+
+.top_nav .dropdown-usermenu > a {
+	padding: 0px 0px 0px 20px;
+}
+
+.top_nav .top-notifications > span {
+	display: none;
+}
+
+.top_nav .top-notifications .badge {
+	font-size: 11px;
+	padding: 1px 4px;
+	position: relative;
+	top: -7px;
+	left: -4px;
 }
 
 .navbar-static-top {
@@ -1684,7 +1719,7 @@ div.box {
 /* *********  /dashboard widget  **************************** */
 /* *********  widgets  *************************************** */
 
-ul.msg_list li {
+ul .top-notifications li {
 	background: #f7f7f7;
 	padding: 5px;
 	display: flex;
@@ -1692,16 +1727,16 @@ ul.msg_list li {
 	width: 96% !important;
 }
 
-ul.msg_list li:last-child {
+ul .top-notifications li:last-child {
 	margin-bottom: 6px;
 	padding: 10px;
 }
 
-ul.msg_list li a {
+ul .top-notifications li a {
 	padding: 3px 5px !important;
 }
 
-ul.msg_list li a .image img {
+ul .top-notifications li a .image img {
 	border-radius: 2px 2px 2px 2px;
 	-webkit-border-radius: 2px 2px 2px 2px;
 	float: left;
@@ -1709,7 +1744,7 @@ ul.msg_list li a .image img {
 	width: 11%;
 }
 
-ul.msg_list li a .time {
+ul .top-notifications li a .time {
 	font-size: 11px;
 	font-style: italic;
 	font-weight: bold;
@@ -1717,9 +1752,10 @@ ul.msg_list li a .time {
 	right: 35px;
 }
 
-ul.msg_list li a .message {
+ul .top-notifications li a .message {
 	display: block !important;
 	font-size: 11px;
+	overflow: hidden;
 }
 
 .dropdown-menu.msg_list {
@@ -1769,6 +1805,7 @@ ul.msg_list li a .message {
 	margin-top: 0;
 	border: 1px solid #D9DEE4;
 	-webkit-box-shadow: none;
+	white-space: pre;;
 }
 
 .info-number .badge {

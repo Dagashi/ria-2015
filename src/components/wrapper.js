@@ -5,8 +5,8 @@ contained in `this.props.children` and rendered out.
 
 var React = require('react');
 
-
 var Sidebar = require("./sidebar");
+var Topnav = require("./topnav");
 
 var menuStyle = {
 	display: 'none'
@@ -18,6 +18,8 @@ var Wrapper = React.createClass({
 			<div className="main_container">
 
 				<Sidebar />
+
+				<Topnav />
 
 				<div className="right_col" role="main">
 					<div>
