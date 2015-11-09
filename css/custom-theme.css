@@ -2172,7 +2172,7 @@ h4.graph_title {
 	border: 1px solid #E4E4E4;
 	-webkit-border-radius: 5px;
 	overflow: hidden;
-	padding-bottom: 5px;
+	padding-bottom: 20px;
 	-webkit-background-clip: padding-box;
 	-moz-border-radius: 5px;
 	-moz-background-clip: padding;
@@ -2268,6 +2268,13 @@ h4.graph_title {
 	background: rgba(0, 0, 0, 0.15);
 }
 
+.tile-stats .stats-action {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	z-index: 10;
+}
+
 table.tile_info {
 	padding: 10px 15px;
 }
@@ -2301,6 +2308,7 @@ table.tile_info span.right {
 	background: rgba(194, 194, 194, 0.3);
 	text-align: left;
 }
+
 /* *********  /Tile stats  **************************** */
 /* *********  /inbox design  **************************** */
 

@@ -18,10 +18,7 @@ var Wrapper = React.createClass({
 				<Topnav />
 
 				<div className="right_col" role="main">
-					<div>
-						{this.props.children}
-						<div className="clearfix"></div>
-					</div>
+					{this.props.children}
 				</div>
 			</div>
 		);
