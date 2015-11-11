@@ -1159,6 +1159,10 @@ h2 {
 	margin-top: 5px;
 }
 
+.x_content.deadlines {
+	padding-bottom: 29px;
+}
+
 .x_content h4 {
 	font-size: 16px;
 	font-weight: 500;
