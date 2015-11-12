@@ -10,7 +10,13 @@ var Home = React.createClass({
 		var ref = new Firebase("https://fiery-inferno-569.firebaseio.com/projects/"+id);
 		this.bindAsObject(ref, "project");
 	},
+	getInitialState: function(){
+		return {};
+	},
 	render: function(){
+		if (!this.state.project){
+			return <div>Loading...</div>;
+		}
 		console.log(this.state.project);
 		return (
 			<div>
