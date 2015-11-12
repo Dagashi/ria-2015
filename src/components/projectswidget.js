@@ -1,6 +1,8 @@
 
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
+var Firebase = require('firebase');
+var ReactFireMixin = require('reactfire');
 var ProjectRow = require("./projectrow");
 
 var Navbar = Bootstrap.Navbar;
@@ -17,12 +19,26 @@ var Tooltip = Bootstrap.Tooltip;
 var Panel = Bootstrap.Panel;
 
 var ProjectsWidget = React.createClass({
+	mixins: [ReactFireMixin],
+	componentWillMount: function() {
+		var ref = new Firebase("https://fiery-inferno-569.firebaseio.com/projects");
+		this.bindAsArray(ref, "projects");
+	},
 	render: function(){
+		var nrOfProjects = this.state.projects.length;
+
+		var rows = [];
+		for (var i=0; i < nrOfProjects; i++) {
+			var tmpProject = this.state.projects[i];
+			//TODO: calculate progress by number of tasks done.
+			rows.push(<ProjectRow projectId={tmpProject.key} name={tmpProject.title} created={tmpProject.created} progress="57" />);
+		}
+
 		return (
-			<div className="col-md-6">
+			<div className={this.props.size}>
 				<div className="x_panel">
 					<div className="x_title">
-						<h2>Recent Projects</h2>
+						<h2>{this.props.title}</h2>
 						<div className="clearfix"></div>
 					</div>
 					<div className="x_content">
@@ -41,9 +57,7 @@ var ProjectsWidget = React.createClass({
 								</tr>
 							</thead>
 							<tbody>
-								<ProjectRow projectId="1" url="#" name="The awesome project 1" created="01.01.2015" progress="57" />
-								<ProjectRow projectId="2" url="#" name="The panini propject" created="06.09.2015" progress="40" />
-								<ProjectRow projectId="3" url="#" name="RIA-project" created="23.10.2015" progress="10" />
+								{rows}
 							</tbody>
 						</table>
 

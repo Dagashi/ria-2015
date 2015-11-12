@@ -37,7 +37,7 @@ var Home = React.createClass({
 				</div>
 
 				<div className="row">
-					<ProjectsWidget />
+					<ProjectsWidget title="Recent Projects" size="col-md-6" />
 
 					<ActivityWidget />
 

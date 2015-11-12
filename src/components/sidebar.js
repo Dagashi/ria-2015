@@ -1,7 +1,10 @@
 
 var React = require('react');
+var Router = require("react-router");
 var Bootstrap = require('react-bootstrap');
 
+var Link = Router.Link;
+var IndexLink = Router.IndexLink;
 var Navbar = Bootstrap.Navbar;
 var NavBrand = Bootstrap.NavBrand;
 var Nav = Bootstrap.Nav;
@@ -87,7 +90,7 @@ var Sidebar = React.createClass({
 									<Panel collapsible expanded={this.state.menuProjectsOpen}>
 										<ul className="nav child_menu">
 											<li><a href="#">New Project</a></li>
-											<li><a href="#">Active Projects</a></li>
+											<li><Link to="/projects/">Active Projects</Link></li>
 											<li><a href="#">Finished Projects</a></li>
 										</ul>
 									</Panel>
