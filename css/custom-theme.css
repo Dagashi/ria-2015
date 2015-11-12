@@ -1128,6 +1128,10 @@ h2 {
 	margin-bottom: 10px;
 }
 
+.project-details .x_title {
+	padding-bottom: 17px;
+}
+
 .x_title .filter {
 	width: 40%;
 	float: right;
@@ -4523,6 +4527,7 @@ ul.messages li .message_wrapper blockquote {
 	padding: 0px 10px;
 	margin: 0;
 	border-left: 5px solid #eee;
+	font-size: 13px;
 }
 
 ul.user_data li {

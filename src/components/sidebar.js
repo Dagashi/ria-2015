@@ -89,7 +89,7 @@ var Sidebar = React.createClass({
 								<li><a href="#" onClick={ this.eventHandler.bind(this, 1) } ><i className="fa fa-briefcase"></i> Projects <span className="fa fa-chevron-down"></span></a>
 									<Panel collapsible expanded={this.state.menuProjectsOpen}>
 										<ul className="nav child_menu">
-											<li><a href="#">New Project</a></li>
+											<li><Link to="/project-new/">New Project</Link></li>
 											<li><Link to="/projects/">Active Projects</Link></li>
 											<li><a href="#">Finished Projects</a></li>
 										</ul>
