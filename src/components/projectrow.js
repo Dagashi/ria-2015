@@ -1,6 +1,8 @@
 var React = require('react');
+var Router = require("react-router");
 var Bootstrap = require('react-bootstrap');
 
+var Link = Router.Link;
 var Tooltip = Bootstrap.Tooltip;
 var ProgressBar = Bootstrap.ProgressBar;
 
@@ -10,7 +12,7 @@ var ProjectRow = React.createClass({
 			<tr>
 				<td>{this.props.projectId}</td>
 				<td>
-					<a href={this.props.url} >{this.props.name}</a>
+					<Link to={"/project/"+this.props.projectId}>{this.props.name}</Link>
 					<br />
 					<small>Created {this.props.created}</small>
 				</td>

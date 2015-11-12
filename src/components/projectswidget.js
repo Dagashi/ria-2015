@@ -24,6 +24,9 @@ var ProjectsWidget = React.createClass({
 		var ref = new Firebase("https://fiery-inferno-569.firebaseio.com/projects");
 		this.bindAsArray(ref, "projects");
 	},
+	getInitialState: function(){
+		return {};
+	},
 	render: function(){
 		var nrOfProjects = this.state.projects.length;
 
@@ -31,7 +34,11 @@ var ProjectsWidget = React.createClass({
 		for (var i=0; i < nrOfProjects; i++) {
 			var tmpProject = this.state.projects[i];
 			//TODO: calculate progress by number of tasks done.
-			rows.push(<ProjectRow projectId={tmpProject.key} name={tmpProject.title} created={tmpProject.created} progress="57" />);
+			rows.push(<ProjectRow projectId={tmpProject[".key"]} name={tmpProject.title} created={tmpProject.created} progress="57" />);
+		}
+
+		if (!this.state.projects){
+			return <div>Loading...</div>;
 		}
 
 		return (
