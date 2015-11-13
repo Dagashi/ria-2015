@@ -1,10 +1,21 @@
 var React = require("react");
+var Bootstrap = require('react-bootstrap');
 var Firebase = require('firebase');
 var ReactFireMixin = require('reactfire');
 var firebaseURL = require("../constants").firebaseURL;
 
+var Alert = Bootstrap.Alert;
+
 var ProjectForm = React.createClass({
 	mixins: [ReactFireMixin],
+	getInitialState: function() {
+		return {
+			message: ""
+		};
+	},
+	handleAlertDismiss: function() {
+		 this.setState({message: ""});
+	},
 	addProject: function(e){
 		e.preventDefault();
 
@@ -20,12 +31,23 @@ var ProjectForm = React.createClass({
 		// message when the data has finished synchronizing.
 		var onComplete = function(error) {
 			if (error) {
-				console.log('Synchronization failed');
+				this.setState(function() {
+					var alert = (<Alert bsStyle="danger" onDismiss={this.handleAlertDismiss} dismissAfter={3000}>
+							<strong>Failed!</strong> The project could not be saved to the database. Please try again later.
+						</Alert>);
+					return {message: alert};
+				});
 			} else {
 				this.refs.title.value = "";
 				this.refs.deadline.value = "";
 				this.refs.description.value = "";
-				
+
+				this.setState(function() {
+					var alert = (<Alert bsStyle="success" onDismiss={this.handleAlertDismiss} dismissAfter={3000}>
+							<strong>Success!</strong> The project was created successfully.
+						</Alert>);
+					return {message: alert};
+				});
 			}
 		};
 
@@ -35,7 +57,7 @@ var ProjectForm = React.createClass({
 			created: projectCreated,
 			deadline: projectDeadline,
 			description: projectDescription
-		}, onComplete);
+		}, onComplete.bind(this));
 	},
 	editProject: function(e){
 		e.preventDefault();
@@ -51,9 +73,19 @@ var ProjectForm = React.createClass({
 		// message when the data has finished synchronizing.
 		var onComplete = function(error) {
 			if (error) {
-				console.log('Synchronization failed');
+				this.setState(function() {
+					var alert = (<Alert bsStyle="danger" onDismiss={this.handleAlertDismiss} dismissAfter={3000}>
+							<strong>Failed!</strong> The project could not be saved to the database. Please try again later.
+						</Alert>);
+					return {message: alert};
+				});
 			} else {
-				console.log('Synchronization succeeded');
+				this.setState(function() {
+					var alert = (<Alert bsStyle="success" onDismiss={this.handleAlertDismiss} dismissAfter={3000}>
+							<strong>Success!</strong> The project was saved successfully.
+						</Alert>);
+					return {message: alert};
+				});
 			}
 		};
 
@@ -67,7 +99,7 @@ var ProjectForm = React.createClass({
 	render: function(){
 		var project = this.props.project;
 		var button = "";
-		console.log(project);
+		
 		if(project != "create new") {
 			button = (<button onClick={ this.editProject.bind(this) } className='btn btn-success'>Save</button>);
 		}
@@ -99,6 +131,7 @@ var ProjectForm = React.createClass({
 					</div>
 				</div>
 				<div className="ln_solid"></div>
+				{this.state.message}
 
 				<div className="form-group">
 					<div className="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
