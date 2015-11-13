@@ -7,6 +7,7 @@ var ProjectMessage = require("./projectmessage");
 var firebaseURL = require("../constants").firebaseURL;
 
 var History = Router.History;
+var Link = Router.Link;
 
 var Project = React.createClass({
 	mixins: [ReactFireMixin, History] ,
@@ -124,8 +125,9 @@ var Project = React.createClass({
 											<br />
 
 											<div className="text-center mtop20">
-												<a href="#" className="btn btn-sm btn-primary">Add files</a>
-												<a href="#" onClick={ this.removeProject.bind(this) } className="btn btn-sm btn-danger">Delete project</a>
+												<a href="#" className="btn btn-sm btn-default"><i className="fa fa-folder"></i> Add files</a>
+												<Link to={"/project-edit/"+this.props.params.id} className="btn btn-primary btn-sm"><i className="fa fa-pencil"></i> Edit </Link>
+												<a href="#" onClick={ this.removeProject.bind(this) } className="btn btn-sm btn-danger"><i className="fa fa-times"></i> Delete project</a>
 											</div>
 										</div>
 

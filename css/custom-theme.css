@@ -1154,6 +1154,10 @@ h2 {
 	color: #BDBDBD;
 }
 
+.x_title span.glyphicon {
+	color: #fff !important;
+}
+
 .x_content {
 	padding: 0 5px 6px;
 	position: relative;

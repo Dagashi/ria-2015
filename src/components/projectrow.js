@@ -39,8 +39,8 @@ var ProjectRow = React.createClass({
 					<small>57% Complete</small>
 				</td>
 				<td>
-					<Link to={"/project/"+this.props.project[".key"]} className="btn btn-primary btn-xs"><i className="fa fa-folder"></i> View </Link>
-					<Link to={"/project-edit/"+this.props.project[".key"]} className="btn btn-info btn-xs"><i className="fa fa-pencil"></i> Edit </Link>
+					<Link to={"/project/"+this.props.project[".key"]} className="btn btn-default btn-xs"><i className="fa fa-eye"></i></Link>
+					<Link to={"/project-edit/"+this.props.project[".key"]} className="btn btn-default btn-xs"><i className="fa fa-pencil"></i></Link>
 				</td>
 			</tr>
 		);
