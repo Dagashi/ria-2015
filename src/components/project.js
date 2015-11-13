@@ -122,6 +122,7 @@ var Project = React.createClass({
 											<div className="text-center mtop20">
 												<a href="#" className="btn btn-sm btn-primary">Add files</a>
 												<a href="#" className="btn btn-sm btn-warning">Report contact</a>
+												<a href="#" className="btn btn-sm btn-alert">Delete project</a>
 											</div>
 										</div>
 

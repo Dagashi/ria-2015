@@ -31,7 +31,7 @@ var Home = React.createClass({
 
 				<div className="row top_tiles">
 					<TopStats icon="fa-comments-o" count="12" title="New Messages" tooltip="Go to Messages" actionGlyph="arrow-right" action="#" >From your co-workers.</TopStats>
-					<TopStats icon="fa-bar-chart" count="7" title="Active Projects" tooltip="Add a new Project" actionGlyph="plus" action="#">Assigned to you.</TopStats>
+					<TopStats icon="fa-bar-chart" count="7" title="Active Projects" tooltip="Add a new Project" actionGlyph="plus" action="#/project-new/">Assigned to you.</TopStats>
 					<TopStats icon="fa-sort-amount-desc" count="35" title="Tasks" tooltip="Add a new Task" actionGlyph="plus" action="#">Assigned to you.</TopStats>
 					<TopStats icon="fa-exclamation-triangle" count="2" title="Urgent" tooltip="View issues" actionGlyph="arrow-right" action="#">Notifications or bug-tickets with urgent status.</TopStats>
 				</div>
