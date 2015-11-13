@@ -11,6 +11,7 @@ var React = require('react'),
 	Projects = require('./components/projects'),
 	Project = require('./components/project'),
 	ProjectAdd = require('./components/projectadd');
+	ProjectEdit = require('./components/projectedit');
 
 module.exports = (
 	<Route path="/" component={Wrapper}>
@@ -19,7 +20,7 @@ module.exports = (
 			<IndexRoute component={Projects} />
 			<Route path="/project/:id" component={Project} />
 			<Route path="/project-new/" component={ProjectAdd} />
-			<Route path="/project-edit/:id" component={ProjectAdd} />
+			<Route path="/project-edit/:id" component={ProjectEdit} />
 		</Route>
 		
 	</Route>

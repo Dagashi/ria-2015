@@ -2,14 +2,16 @@ var React = require("react");
 var Firebase = require('firebase');
 var ReactFireMixin = require('reactfire');
 var Router = require("react-router");
+var TopSearch = require("./topsearch.js");
 var ProjectMessage = require("./projectmessage");
+var firebaseURL = require("../constants").firebaseURL;
 
 var History = Router.History;
 
 var Project = React.createClass({
 	mixins: [ReactFireMixin, History] ,
 	componentWillMount: function() {
-		var project = new Firebase("https://fiery-inferno-569.firebaseio.com/projects/"+this.props.params.id);
+		var project = new Firebase(firebaseURL+"/projects/"+this.props.params.id);
 		this.bindAsObject(project, "project");
 	},
 	getInitialState: function(){
@@ -17,7 +19,7 @@ var Project = React.createClass({
 	},
 	removeProject: function(e) {
 		e.preventDefault();
-		var project = new Firebase("https://fiery-inferno-569.firebaseio.com/projects/"+this.props.params.id);
+		var project = new Firebase(firebaseURL+"/projects/"+this.props.params.id);
 		project.remove();
 
 		this.history.pushState(null, "/projects/");
@@ -39,17 +41,7 @@ var Project = React.createClass({
 						</h3>
 					</div>
 
-					<div className="title_right">
-						<div className="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-							<div className="input-group">
-								<input className="form-control" placeholder="Search for..." type="text" />
-
-								<span className="input-group-btn">
-									<button className="btn btn-default" type="button">Go!</button>
-								</span>
-							</div>
-						</div>
-					</div>
+					<TopSearch />
 				</div>
 				<div className="clearfix"></div>
 

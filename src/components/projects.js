@@ -1,10 +1,11 @@
 var React = require("react");
 var Router = require("react-router");
+var TopSearch = require("./topsearch.js");
 var ProjectsWidget = require("./projectswidget");
 
 var Link = Router.Link;
 
-var Home = React.createClass({
+var Projects = React.createClass({
 	render: function(){
 		return (
 			<div>
@@ -15,17 +16,7 @@ var Home = React.createClass({
 						</h3>
 					</div>
 
-					<div className="title_right">
-						<div className="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-							<div className="input-group">
-								<input className="form-control" placeholder="Search for..." type="text" />
-
-								<span className="input-group-btn">
-									<button className="btn btn-default" type="button">Go!</button>
-								</span>
-							</div>
-						</div>
-					</div>
+					<TopSearch />
 				</div>
 				<div className="clearfix"></div>
 
@@ -39,4 +30,4 @@ var Home = React.createClass({
 	}
 });
 
-module.exports = Home;
+module.exports = Projects;

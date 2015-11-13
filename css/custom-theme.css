@@ -1337,7 +1337,11 @@ table.tile_info td:first-child {
 }
 
 td span {
-	line-height: 28px;
+	/*line-height: 28px;*/
+}
+
+.btn td span {
+	line-height: 17px;
 }
 
 .sidebar-widget {

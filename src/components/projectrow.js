@@ -8,13 +8,19 @@ var ProgressBar = Bootstrap.ProgressBar;
 
 var ProjectRow = React.createClass({
 	render: function(){
+		//TODO: calculate progress by number of tasks done.
+		//TODO: get all users assigned to the project.
+		var edited = "";
+		if(this.props.project.edited) {
+			edited = (<span><br /><small>Edited {this.props.project.edited}</small></span>);
+		}
 		return (
 			<tr>
-				<td>{this.props.projectId}</td>
 				<td>
-					<Link to={"/project/"+this.props.projectId}>{this.props.name}</Link>
+					<Link to={"/project/"+this.props.project[".key"]}>{this.props.project.title}</Link>
 					<br />
-					<small>Created {this.props.created}</small>
+					<small>Created {this.props.project.created}</small>
+					{edited}
 				</td>
 				<td>
 					<ul className="list-inline">
@@ -28,12 +34,13 @@ var ProjectRow = React.createClass({
 				</td>
 				<td className="project_progress">
 					<div className="progress progress_sm">
-						<ProgressBar bsStyle="success" now={this.props.progress} data-transitiongoal={this.props.progress} />
+						<ProgressBar bsStyle="success" now="57" />
 					</div>
-					<small>{this.props.progress}% Complete</small>
+					<small>57% Complete</small>
 				</td>
 				<td>
-					<a href={this.props.url} className="btn btn-primary btn-xs"><i className="fa fa-folder"></i> View </a>
+					<Link to={"/project/"+this.props.project[".key"]} className="btn btn-primary btn-xs"><i className="fa fa-folder"></i> View </Link>
+					<Link to={"/project-edit/"+this.props.project[".key"]} className="btn btn-info btn-xs"><i className="fa fa-pencil"></i> Edit </Link>
 				</td>
 			</tr>
 		);

@@ -1,28 +1,21 @@
-
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
 var Firebase = require('firebase');
 var ReactFireMixin = require('reactfire');
+var firebaseURL = require("../constants").firebaseURL;
 var ProjectRow = require("./projectrow");
 
-var Navbar = Bootstrap.Navbar;
-var NavBrand = Bootstrap.NavBrand;
-var Nav = Bootstrap.Nav;
-var NavItem = Bootstrap.NavItem;
-var NavDropdown = Bootstrap.NavDropdown;
-var MenuItem = Bootstrap.MenuItem;
 var OverlayTrigger = Bootstrap.OverlayTrigger;
 var Button = Bootstrap.Button;
-var ButtonToolbar = Bootstrap.ButtonToolbar;
 var Glyphicon = Bootstrap.Glyphicon;
 var Tooltip = Bootstrap.Tooltip;
-var Panel = Bootstrap.Panel;
+
 
 var ProjectsWidget = React.createClass({
 	mixins: [ReactFireMixin],
 	componentWillMount: function() {
-		var ref = new Firebase("https://fiery-inferno-569.firebaseio.com/projects");
-		this.bindAsArray(ref, "projects");
+		var projects = new Firebase(firebaseURL+"/projects");
+		this.bindAsArray(projects, "projects");
 	},
 	getInitialState: function(){
 		return {};
@@ -32,35 +25,44 @@ var ProjectsWidget = React.createClass({
 
 		var rows = [];
 		for (var i=0; i < nrOfProjects; i++) {
-			var tmpProject = this.state.projects[i];
-			//TODO: calculate progress by number of tasks done.
-			rows.push(<ProjectRow projectId={tmpProject[".key"]} name={tmpProject.title} created={tmpProject.created} progress="57" />);
+			rows.push(<ProjectRow project={this.state.projects[i]} />);
 		}
 
 		if (!this.state.projects){
 			return <div>Loading...</div>;
 		}
 
+		var tooltip = (
+			<Tooltip>Create a new project</Tooltip>
+		);
+		var addButton = (
+			<OverlayTrigger placement="top" overlay={tooltip}>
+				<Button bsStyle="success" href="#/project-new/" className="stats-action pull-right">
+					<Glyphicon glyph="plus" />
+				</Button>
+			</OverlayTrigger>
+		);
+
 		return (
 			<div className={this.props.size}>
 				<div className="x_panel">
 					<div className="x_title">
 						<h2>{this.props.title}</h2>
+						{addButton}
+
 						<div className="clearfix"></div>
 					</div>
 					<div className="x_content">
 
 						<p>The most recent projects you have been assigned.</p>
 
-
 						<table className="table table-striped projects">
 							<thead>
 								<tr>
-									<th style={{width: 1+"%"}}>#</th>
 									<th style={{width: 25+"%"}}>Project Name</th>
 									<th>Team Members</th>
 									<th>Project Progress</th>
-									<th style={{width: 10+"%"}}>Edit</th>
+									<th style={{width: 15+"%"}}>Edit</th>
 								</tr>
 							</thead>
 							<tbody>
