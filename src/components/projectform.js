@@ -4,6 +4,9 @@ var ProjectForm = React.createClass({
 	render: function(){
 		var project = this.props.project;
 		console.log(project);
+		if (!project){
+			return <p>Loading! :)</p>;
+		}
 		return (
 			<div>
 				<div className="form-group">
