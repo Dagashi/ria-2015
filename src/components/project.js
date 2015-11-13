@@ -19,10 +19,13 @@ var Project = React.createClass({
 	},
 	removeProject: function(e) {
 		e.preventDefault();
-		var project = new Firebase(firebaseURL+"/projects/"+this.props.params.id);
-		project.remove();
 
-		this.history.pushState(null, "/projects/");
+		if (confirm("This will permanently remove this project from the database. Are you sure you want to do this?")) {
+			var project = new Firebase(firebaseURL+"/projects/"+this.props.params.id);
+			project.remove();
+
+			this.history.pushState(null, "/projects/");
+		}
 	},
 	render: function(){
 		if (!this.state.project){
