@@ -111,19 +111,19 @@ var ProjectAdd = React.createClass({
 									<div className="form-group">
 										<label className="control-label col-md-3 col-sm-3 col-xs-12">Project title</label>
 										<div className="col-md-9 col-sm-9 col-xs-12">
-											<input type="text" ref="title" className="form-control" placeholder="Title" value={(this.state.project != null) ? this.state.project.title : "" } onChange={this.handleChange.bind(this)} />
+											<input type="text" ref="title" className="form-control" placeholder="Title" defaultValue={(this.state.project != null) ? this.state.project.title : "" } onChange={this.handleChange.bind(this)} />
 										</div>
 									</div>
 									<div className="form-group">
 										<label className="control-label col-md-3 col-sm-3 col-xs-12">Project deadline</label>
 										<div className="col-md-9 col-sm-9 col-xs-12">
-											<input type="text" ref="deadline" className="form-control" placeholder="Deadline" value={(this.state.project != null) ? this.state.project.deadline : ""} onChange={this.handleChange.bind(this)} />
+											<input type="text" ref="deadline" className="form-control" placeholder="Deadline" defaultValue={(this.state.project != null) ? this.state.project.deadline : ""} onChange={this.handleChange.bind(this)} />
 										</div>
 									</div>
 									<div className="form-group">
 										<label className="control-label col-md-3 col-sm-3 col-xs-12">Project description</label>
 										<div className="col-md-9 col-sm-9 col-xs-12">
-											<textarea className="form-control" ref="description" rows="3" placeholder="Description" value={(this.state.project != null) ? this.state.project.description : "" } onChange={this.handleChange.bind(this)} ></textarea>
+											<textarea className="form-control" ref="description" rows="3" placeholder="Description" defaultValue={(this.state.project != null) ? this.state.project.description : "" } onChange={this.handleChange.bind(this)} ></textarea>
 										</div>
 									</div>
 
