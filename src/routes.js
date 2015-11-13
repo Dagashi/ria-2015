@@ -19,6 +19,7 @@ module.exports = (
 			<IndexRoute component={Projects} />
 			<Route path="/project/:id" component={Project} />
 			<Route path="/project-new/" component={ProjectAdd} />
+			<Route path="/project-edit/:id" component={ProjectAdd} />
 		</Route>
 		
 	</Route>

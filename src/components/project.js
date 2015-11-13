@@ -1,17 +1,26 @@
 var React = require("react");
 var Firebase = require('firebase');
 var ReactFireMixin = require('reactfire');
+var Router = require("react-router");
 var ProjectMessage = require("./projectmessage");
 
+var History = Router.History;
+
 var Project = React.createClass({
-	mixins: [ReactFireMixin],
+	mixins: [ReactFireMixin, History] ,
 	componentWillMount: function() {
-		var id = this.props.params.id;
-		var ref = new Firebase("https://fiery-inferno-569.firebaseio.com/projects/"+id);
-		this.bindAsObject(ref, "project");
+		var project = new Firebase("https://fiery-inferno-569.firebaseio.com/projects/"+this.props.params.id);
+		this.bindAsObject(project, "project");
 	},
 	getInitialState: function(){
 		return {};
+	},
+	removeProject: function(e) {
+		e.preventDefault();
+		var project = new Firebase("https://fiery-inferno-569.firebaseio.com/projects/"+this.props.params.id);
+		project.remove();
+
+		this.history.pushState(null, "/projects/");
 	},
 	render: function(){
 		if (!this.state.project){
@@ -121,8 +130,7 @@ var Project = React.createClass({
 
 											<div className="text-center mtop20">
 												<a href="#" className="btn btn-sm btn-primary">Add files</a>
-												<a href="#" className="btn btn-sm btn-warning">Report contact</a>
-												<a href="#" className="btn btn-sm btn-alert">Delete project</a>
+												<a href="#" onClick={ this.removeProject.bind(this) } className="btn btn-sm btn-danger">Delete project</a>
 											</div>
 										</div>
 
