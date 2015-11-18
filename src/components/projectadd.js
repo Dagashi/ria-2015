@@ -2,6 +2,9 @@ var React = require("react");
 var Router = require('react-router');
 var TopSearch = require("./topsearch.js");
 var ProjectForm = require("./projectform");
+var ReactRedux = require("react-redux");
+
+var actions = require("../actions/");
 
 var History = Router.History;
 
@@ -30,7 +33,7 @@ var ProjectAdd = React.createClass({
 							<div className="x_content">
 								<br />
 								
-								<ProjectForm project="create new" />
+								<ProjectForm callback={this.props.addnewproject} />
 								
 							</div>
 						</div>
@@ -43,4 +46,20 @@ var ProjectAdd = React.createClass({
 	}
 });
 
-module.exports = ProjectAdd;
+
+// now we connect the component to the Redux store:
+
+var mapStateToProps = function(appstate){
+	// this component doesn't need any data from app state
+	return {};
+};
+
+var mapDispatchToProps = function(dispatch){
+	return {
+		addnewproject: function(title,deadline,desc){
+			dispatch(actions.addNewProject(title,deadline,desc));
+		}
+	}
+};
+
+module.exports = ReactRedux.connect(mapStateToProps,mapDispatchToProps)(ProjectAdd);
