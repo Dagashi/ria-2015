@@ -1,22 +1,19 @@
 var React = require("react");
 var Router = require('react-router');
-var Firebase = require('firebase');
-var ReactFireMixin = require('reactfire');
 var TopSearch = require("./topsearch.js");
 var ProjectForm = require("./projectform");
-
+var ReactRedux = require("react-redux");
 var History = Router.History;
+var actions = require("../actions/");
 
 var ProjectEdit = React.createClass({
-	mixins: [ReactFireMixin, History],
-	componentWillMount: function() {
-		var project = new Firebase("https://fiery-inferno-569.firebaseio.com/projects/"+this.props.params.id);
-		this.bindAsObject(project, "project");
-	},
-	getInitialState: function(){
-		return {project: null};
-	},
+	mixins: [History],
 	render: function(){
+		var projectid = this.props.params.id,
+			project = this.props.projects[projectid];
+		if (!project) {
+			return <p>Loading...</p>;
+		}
 		return (
 			<div>
 				<div className="page-title">
@@ -33,14 +30,12 @@ var ProjectEdit = React.createClass({
 						<div className="x_panel">
 							<div className="x_title">
 								<button className="btn btn-default btn-sm pull-left" onClick={this.history.goBack}><i className="fa fa-arrow-left"></i></button>
-								<h2>Edit - {(this.state.project != null) ? this.state.project.title : "Project Loading..." }</h2>
+								<h2>Edit - {project.title}</h2>
 								<div className="clearfix"></div>
 							</div>
 							<div className="x_content">
 								<br />
-
-									<ProjectForm project={(this.state.project != null) ? this.state.project : null } />
-
+									<ProjectForm project={project} callback={this.props.updateproject.bind(this,projectid)} />
 							</div>
 						</div>
 					</div>
@@ -52,4 +47,20 @@ var ProjectEdit = React.createClass({
 	}
 });
 
-module.exports = ProjectEdit;
+
+// now we connect the component to the Redux store:
+
+var mapStateToProps = function(appstate){
+	// This component will have access to `appstate.projects` through `this.props.projects`
+	return {projects:appstate.projects};
+};
+
+var mapDispatchToProps = function(dispatch){
+	return {
+		updateproject: function(projectid,title,deadline,desc){
+			dispatch(actions.submitProjectUpdate(projectid,title,deadline,desc));
+		}
+	}
+};
+
+module.exports = ReactRedux.connect(mapStateToProps,mapDispatchToProps)(ProjectEdit);

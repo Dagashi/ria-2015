@@ -1,36 +1,19 @@
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
-var Firebase = require('firebase');
-var ReactFireMixin = require('reactfire');
-var firebaseURL = require("../constants").firebaseURL;
 var ProjectRow = require("./projectrow");
+var ReactRedux = require("react-redux");
 
 var OverlayTrigger = Bootstrap.OverlayTrigger;
 var Button = Bootstrap.Button;
 var Glyphicon = Bootstrap.Glyphicon;
 var Tooltip = Bootstrap.Tooltip;
 
+var _ = require("lodash");
 
 var ProjectsWidget = React.createClass({
-	mixins: [ReactFireMixin],
-	componentWillMount: function() {
-		var projects = new Firebase(firebaseURL+"/projects");
-		this.bindAsArray(projects, "projects");
-	},
-	getInitialState: function(){
-		return {};
-	},
 	render: function(){
-		var nrOfProjects = this.state.projects.length;
-
-		var rows = [];
-		for (var i=0; i < nrOfProjects; i++) {
-			rows.push(<ProjectRow project={this.state.projects[i]} />);
-		}
-
-		if (!this.state.projects){
-			return <div>Loading...</div>;
-		}
+		var projects = this.props.projects;
+			rows = _.map(projects,function(p){return <ProjectRow project={p} />}); 	
 
 		var tooltip = (
 			<Tooltip>Create a new project</Tooltip>
@@ -78,3 +61,12 @@ var ProjectsWidget = React.createClass({
 });
 
 module.exports = ProjectsWidget;
+
+// now we connect the component to the Redux store:
+
+var mapStateToProps = function(appstate){
+	// This component will have access to `appstate.projects` through `this.props.projects`
+	return {projects:appstate.projects};
+};
+
+module.exports = ReactRedux.connect(mapStateToProps)(ProjectsWidget);

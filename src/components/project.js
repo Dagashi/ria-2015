@@ -1,41 +1,34 @@
 var React = require("react");
-var Firebase = require('firebase');
-var ReactFireMixin = require('reactfire');
+
 var Router = require("react-router");
 var TopSearch = require("./topsearch.js");
 var ProjectMessage = require("./projectmessage");
-var firebaseURL = require("../constants").firebaseURL;
+var ReactRedux = require("react-redux");
+var actions = require("../actions/");
+
 
 var History = Router.History;
 var Link = Router.Link;
 
 var Project = React.createClass({
-	mixins: [ReactFireMixin, History] ,
-	componentWillMount: function() {
-		var project = new Firebase(firebaseURL+"/projects/"+this.props.params.id);
-		this.bindAsObject(project, "project");
-	},
-	getInitialState: function(){
-		return {};
-	},
+	mixins: [History] ,
 	removeProject: function(e) {
 		e.preventDefault();
 
 		if (confirm("This will permanently remove this project from the database. Are you sure you want to do this?")) {
-			var project = new Firebase(firebaseURL+"/projects/"+this.props.params.id);
-			project.remove();
-
+			this.props.deleteproject(this.props.params.id);
 			this.history.pushState(null, "/projects/");
 		}
 	},
 	render: function(){
-		if (!this.state.project){
+		var project = this.props.projects[this.props.params.id];
+		if (!project){
 			return <div>Loading...</div>;
 		}
 
 		setTimeout(function(){ this.drawChart() }.bind(this), 1000);
 
-		console.log(this.state.project);
+		console.log(project);
 		return (
 			<div>
 				<div className="page-title">
@@ -53,7 +46,7 @@ var Project = React.createClass({
 					<div className="col-md-12">
 						<div className="x_panel">
 							<div className="x_title">
-								<h2>{this.state.project.title}</h2>
+								<h2>{project.title}</h2>
 								<div className="clearfix"></div>
 							</div>
 
@@ -72,7 +65,7 @@ var Project = React.createClass({
 										</li>
 										<li className="hidden-phone">
 											<span className="name"> Deadline </span>
-											<span className="value text-success"> {this.state.project.deadline} </span>
+											<span className="value text-success"> {project.deadline} </span>
 										</li>
 									</ul>
 									<br />
@@ -97,7 +90,7 @@ var Project = React.createClass({
 											<div className="clearfix"></div>
 										</div>
 										<div className="panel-body">
-											<p>{this.state.project.description}</p>
+											<p>{project.description}</p>
 											<br />
 
 											<div className="project_detail">
@@ -226,4 +219,19 @@ var Project = React.createClass({
 	}
 });
 
-module.exports = Project;
+// now we connect the component to the Redux store:
+
+var mapStateToProps = function(appstate){
+	// This component will have access to `appstate.projects` through `this.props.projects`
+	return {projects:appstate.projects};
+};
+
+var mapDispatchToProps = function(dispatch){
+	return {
+		deleteproject: function(projectid){
+			dispatch(actions.deleteProject(projectid));
+		}
+	}
+};
+
+module.exports = ReactRedux.connect(mapStateToProps,mapDispatchToProps)(Project);

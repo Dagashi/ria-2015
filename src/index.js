@@ -7,9 +7,18 @@ var React = require('react'),
 	ReactDOM = require('react-dom'),
 	Router = require('react-router').Router,
 	Provider = require('react-redux').Provider,
-	routes = require('./routes');
+	store = require('./store'),
+	routes = require('./routes'),
+	actions = require('./actions/');
 
 ReactDOM.render(
-	<Router routes={routes}/>,
+	// Wrapping the router in provider so components can `connect` to store using ReactRedux
+	<Provider store={store}>
+		<Router routes={routes}/>
+	</Provider>,
 	document.getElementById("root")
 );
+
+setTimeout(function(){
+	store.dispatch( actions.startListeningToProjects() );
+});
