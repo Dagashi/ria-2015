@@ -6,6 +6,7 @@ var ProjectMessage = require("./projectmessage");
 var ReactRedux = require("react-redux");
 var actions = require("../actions/");
 var TaskForm = require("./taskform");
+var TasksWidget = require("./taskswidget");
 
 
 var History = Router.History;
@@ -140,6 +141,7 @@ var Project = React.createClass({
 							</div>
 
 							<div className="x_content">
+								<TasksWidget projectId={this.props.params.id} />
 								<TaskForm projectId={this.props.params.id} callback={this.props.addNewTask.bind(this,this.props.params.id)} />
 							</div>
 						</div>

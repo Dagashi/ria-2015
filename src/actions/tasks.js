@@ -10,6 +10,17 @@ var C = require("../constants"),
 	_ = require("lodash");
 
 module.exports = {
+	// called when the app starts
+	startListeningToTasks: function(){
+		return function(dispatch,getState){
+			tasksRef.on("value",function(snapshot){
+				var tasks = _.mapValues(snapshot.val(),function(task,key){
+					return Object.assign({".key":key},task);
+				});
+				dispatch({ type: C.LOADED_ALL_TASKS, tasks:tasks });
+			});
+		}
+	},
 	// To be called when a user clicks a "submit" button in an edit field
 	submitTaskUpdate: function(projectid,title,deadline,description){
 		return function(dispatch,getState){
