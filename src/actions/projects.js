@@ -27,6 +27,13 @@ module.exports = {
 		return function(dispatch,getState){
 			// TODO - dispatch an action here that sets a spinner or something so the user knows he's waiting
 			projectsRef.child(projectid).transaction(function(currentstatus){
+				/*
+				This could be writen as this, but bellow is more elegant ES6 way of writing.
+				currentstatus.title = title;
+				currentstatus.deadline = deadline;
+				currentstatus.description = description;
+				return currentstatus;
+				*/
 				return Object.assign(currentstatus,{title,deadline,description}); // we don't want to overwrite created etc
 			},function(error){
 				// TODO - dispatch new action here to stop spinner. And probably show error if there was any.

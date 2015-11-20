@@ -5,6 +5,7 @@ var TopSearch = require("./topsearch.js");
 var ProjectMessage = require("./projectmessage");
 var ReactRedux = require("react-redux");
 var actions = require("../actions/");
+var TaskForm = require("./taskform");
 
 
 var History = Router.History;
@@ -43,7 +44,7 @@ var Project = React.createClass({
 				<div className="clearfix"></div>
 
 				<div className="row">
-					<div className="col-md-12">
+					<div className="col-md-8">
 						<div className="x_panel">
 							<div className="x_title">
 								<h2>{project.title}</h2>
@@ -128,6 +129,18 @@ var Project = React.createClass({
 
 								</div>
 
+							</div>
+						</div>
+					</div>
+					<div className="col-md-4">
+						<div className="x_panel">
+							<div className="x_title">
+								<h2>Tasks</h2>
+								<div className="clearfix"></div>
+							</div>
+
+							<div className="x_content">
+								<TaskForm projectId={this.props.params.id} callback={this.props.addNewTask.bind(this,this.props.params.id)} />
 							</div>
 						</div>
 					</div>
@@ -230,6 +243,9 @@ var mapDispatchToProps = function(dispatch){
 	return {
 		deleteproject: function(projectid){
 			dispatch(actions.deleteProject(projectid));
+		},
+		addNewTask: function(projectid,title,deadline,desc){
+			dispatch(actions.addNewTask(projectid,title,deadline,desc));
 		}
 	}
 };

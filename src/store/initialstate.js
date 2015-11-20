@@ -4,5 +4,6 @@ but for now it only has a projects prop.
 */
 
 module.exports = {
-	projects: {}
+	projects: {},
+	tasks: {}
 };
