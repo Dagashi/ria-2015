@@ -14,7 +14,9 @@ module.exports = {
 	startListeningToProjects: function(){
 		return function(dispatch,getState){
 			projectsRef.on("value",function(snapshot){
-				var projects = snapshot.val();
+				var projects = _.mapValues(snapshot.val(),function(proj,key){
+					return Object.assign({".key":key},proj);
+				});
 				dispatch({ type: C.LOADED_ALL_PROJECTS, projects:projects });
 			});
 		}
