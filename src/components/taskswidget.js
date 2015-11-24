@@ -13,7 +13,7 @@ var _ = require("lodash");
 var TasksWidget = React.createClass({
 	render: function(){
 		var tasks = this.props.tasks[this.props.projectId];
-			rows = _.map(tasks,function(t){return <Task task={t} />});
+		var rows = _.map(tasks,function(t){return <Task task={t} />});
 
 		var tooltip = (
 			<Tooltip>Create a new task for this project</Tooltip>

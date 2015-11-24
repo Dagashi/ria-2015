@@ -14,9 +14,7 @@ module.exports = {
 	startListeningToProjects: function(){
 		return function(dispatch,getState){
 			projectsRef.on("value",function(snapshot){
-				var projects = _.mapValues(snapshot.val(),function(proj,key){
-					return Object.assign({".key":key},proj);  // Tydligen vill du ha id i denna prop
-				});
+				var projects = snapshot.val();
 				dispatch({ type: C.LOADED_ALL_PROJECTS, projects:projects });
 			});
 		}

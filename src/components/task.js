@@ -8,7 +8,6 @@ var ProgressBar = Bootstrap.ProgressBar;
 
 var Task = React.createClass({
 	render: function(){
-		console.log(this.props.task);
 		//TODO: get user assigned to the task.
 		var edited = "";
 		if(this.props.task.edited) {

@@ -14,9 +14,7 @@ module.exports = {
 	startListeningToTasks: function(){
 		return function(dispatch,getState){
 			tasksRef.on("value",function(snapshot){
-				var tasks = _.mapValues(snapshot.val(),function(task,key){
-					return Object.assign({".key":key},task);
-				});
+				var tasks = snapshot.val();
 				dispatch({ type: C.LOADED_ALL_TASKS, tasks:tasks });
 			});
 		}
