@@ -8,7 +8,7 @@ var TaskForm = React.createClass({
 		var title = this.refs.title.value;
 		var deadline = this.refs.deadline.value;
 		var desc = this.refs.description.value;
-		this.props.callback(this.props.projectId,title,deadline,desc);
+		this.props.callback(title,deadline,desc);
 	},
 	render: function(){
 		var task = this.props.task || {};
