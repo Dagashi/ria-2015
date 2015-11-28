@@ -9,6 +9,7 @@ var TaskForm = React.createClass({
 		var deadline = this.refs.deadline.value;
 		var desc = this.refs.description.value;
 		this.props.callback(title,deadline,desc);
+		this.props.closeAddTask();
 	},
 	render: function(){
 		var task = this.props.task || {};
@@ -35,7 +36,7 @@ var TaskForm = React.createClass({
 
 				<div className="form-group">
 					<div className="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-						<button onClick={this.submit}>Submit</button>
+						<button className="btn btn-success" onClick={this.submit}>Submit</button>
 					</div>
 				</div>
 

@@ -5,7 +5,6 @@ var TopSearch = require("./topsearch.js");
 var ProjectMessage = require("./projectmessage");
 var ReactRedux = require("react-redux");
 var actions = require("../actions/");
-var TaskForm = require("./taskform");
 var TasksWidget = require("./taskswidget");
 
 
@@ -142,7 +141,6 @@ var Project = React.createClass({
 
 							<div className="x_content">
 								<TasksWidget projectId={this.props.params.id} />
-								<TaskForm projectId={this.props.params.id} callback={this.props.addNewTask.bind(this,this.props.params.id)} />
 							</div>
 						</div>
 					</div>
@@ -245,9 +243,6 @@ var mapDispatchToProps = function(dispatch){
 	return {
 		deleteproject: function(projectid){
 			dispatch(actions.deleteProject(projectid));
-		},
-		addNewTask: function(projectid,title,deadline,desc){
-			dispatch(actions.addNewTask(projectid,title,deadline,desc));
 		}
 	}
 };

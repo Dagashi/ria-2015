@@ -2,15 +2,27 @@ var React = require('react');
 var Bootstrap = require('react-bootstrap');
 var Task = require("./task");
 var ReactRedux = require("react-redux");
+var actions = require("../actions/");
+var TaskForm = require("./taskform");
 
 var OverlayTrigger = Bootstrap.OverlayTrigger;
 var Button = Bootstrap.Button;
 var Glyphicon = Bootstrap.Glyphicon;
 var Tooltip = Bootstrap.Tooltip;
+var Modal = Bootstrap.Modal;
 
 var _ = require("lodash");
 
 var TasksWidget = React.createClass({
+	getInitialState() {
+		return { showAddTask: false };
+	},
+	closeAddTask() {
+		this.setState({ showAddTask: false });
+	},
+	openAddTask() {
+		this.setState({ showAddTask: true });
+	},
 	render: function(){
 		var tasks = this.props.tasks[this.props.projectId];
 		var rows = _.map(tasks,function(t){return <Task task={t} />});
@@ -20,7 +32,7 @@ var TasksWidget = React.createClass({
 		);
 		var addButton = (
 			<OverlayTrigger placement="top" overlay={tooltip}>
-				<Button bsStyle="success" href="#/project-new/" className="stats-action pull-right">
+				<Button bsStyle="success" onClick={this.openAddTask} className="stats-action pull-right">
 					<Glyphicon glyph="plus" />
 				</Button>
 			</OverlayTrigger>
@@ -32,6 +44,17 @@ var TasksWidget = React.createClass({
 					<div className="x_title">
 						<h2>{this.props.title}</h2>
 						{addButton}
+
+						<Modal show={this.state.showAddTask} onHide={this.closeAddTask}>
+							<Modal.Header closeButton>
+								<Modal.Title>Add new Task</Modal.Title>
+							</Modal.Header>
+							<Modal.Body>
+								<TaskForm projectId={this.props.projectId} callback={this.props.addNewTask.bind(this,this.props.projectId)} closeAddTask={this.closeAddTask.bind(this)} />
+							</Modal.Body>
+							<Modal.Footer>
+							</Modal.Footer>
+						</Modal>
 
 						<div className="clearfix"></div>
 					</div>
@@ -69,4 +92,12 @@ var mapStateToProps = function(appstate){
 	return {tasks:appstate.tasks};
 };
 
-module.exports = ReactRedux.connect(mapStateToProps)(TasksWidget);
+var mapDispatchToProps = function(dispatch){
+	return {
+		addNewTask: function(projectid,title,deadline,desc){
+			dispatch(actions.addNewTask(projectid,title,deadline,desc));
+		}
+	}
+};
+
+module.exports = ReactRedux.connect(mapStateToProps,mapDispatchToProps)(TasksWidget);
