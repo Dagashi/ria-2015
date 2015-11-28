@@ -36,7 +36,7 @@ var TaskForm = React.createClass({
 
 				<div className="form-group">
 					<div className="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-						<button className="btn btn-success" onClick={this.submit}>Submit</button>
+						<button className="btn btn-success" onClick={this.submit}>Create Task</button>
 					</div>
 				</div>
 

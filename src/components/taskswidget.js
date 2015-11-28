@@ -25,24 +25,18 @@ var TasksWidget = React.createClass({
 	},
 	render: function(){
 		var tasks = this.props.tasks[this.props.projectId];
-		var rows = _.map(tasks,function(t){return <Task task={t} />});
+		var rows = _.map(tasks,function(t){ return <Task task={t} /> });
 
-		var tooltip = (
-			<Tooltip>Create a new task for this project</Tooltip>
-		);
 		var addButton = (
-			<OverlayTrigger placement="top" overlay={tooltip}>
-				<Button bsStyle="success" onClick={this.openAddTask} className="stats-action pull-right">
-					<Glyphicon glyph="plus" />
-				</Button>
-			</OverlayTrigger>
+			<Button bsStyle="success" onClick={this.openAddTask} className="stats-action pull-right">
+				<Glyphicon glyph="plus" />
+			</Button>
 		);
 
 		return (
 			<div className={this.props.size}>
 				<div className="x_panel">
-					<div className="x_title">
-						<h2>{this.props.title}</h2>
+					<div className="x_content">
 						{addButton}
 
 						<Modal show={this.state.showAddTask} onHide={this.closeAddTask}>
@@ -56,19 +50,15 @@ var TasksWidget = React.createClass({
 							</Modal.Footer>
 						</Modal>
 
-						<div className="clearfix"></div>
-					</div>
-					<div className="x_content">
-
-						<p>The most recent projects you have been assigned.</p>
+						<p>The tasks for this project.</p>
 
 						<table className="table table-striped projects">
 							<thead>
 								<tr>
 									<th style={{width: 5+"%"}}></th>
-									<th>Assigned</th>
+									<th style={{width: 15+"%"}}>Assigned</th>
 									<th>Task</th>
-									<th style={{width: 15+"%"}}></th>
+									<th style={{width: 20+"%"}}></th>
 								</tr>
 							</thead>
 							<tbody>
