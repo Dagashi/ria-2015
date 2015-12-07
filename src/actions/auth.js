@@ -33,7 +33,13 @@ module.exports = {
 					dispatch({type:C.DISPLAY_ERROR,error:"Login failed! "+error});
 					dispatch({type:C.LOGOUT});
 				} else {
-					// no need to do anything here, startListeningToAuth have already made sure that we update on changes
+					if (authData){ 
+						dispatch({
+							type: C.LOGIN_USER,
+							uid: authData.uid,
+							username: authData.github.displayName || authData.github.username
+						});
+					}
 				}
 			});
 		}

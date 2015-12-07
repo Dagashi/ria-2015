@@ -1,6 +1,6 @@
 var Redux = require("redux"),
-	projectReducer = require("./projects");
-	taskReducer = require("./tasks");
+	projectReducer = require("./projects"),
+	taskReducer = require("./tasks"),
 	authReducer = require("./auth");
 
 /*
