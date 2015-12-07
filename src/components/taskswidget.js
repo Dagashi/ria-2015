@@ -24,8 +24,9 @@ var TasksWidget = React.createClass({
 		this.setState({ showAddTask: true });
 	},
 	render: function(){
-		var tasks = this.props.tasks[this.props.projectId];
-		var rows = _.map(tasks,function(t){ return <Task task={t} /> });
+		var tasks = this.props.tasks;
+		var rows = _.filter(tasks, 'projectid', this.props.projectId)
+			rows = _.map(rows,function(t){ return <Task task={t} /> });
 
 		var addButton = (
 			<Button bsStyle="success" onClick={this.openAddTask} className="stats-action pull-right">
@@ -44,7 +45,7 @@ var TasksWidget = React.createClass({
 								<Modal.Title>Add new Task</Modal.Title>
 							</Modal.Header>
 							<Modal.Body>
-								<TaskForm projectId={this.props.projectId} callback={this.props.addNewTask.bind(this,this.props.projectId)} closeAddTask={this.closeAddTask.bind(this)} />
+								<TaskForm projectId={this.props.projectId} callback={this.props.addNewTask} closeAddTask={this.closeAddTask.bind(this)} />
 							</Modal.Body>
 							<Modal.Footer>
 							</Modal.Footer>

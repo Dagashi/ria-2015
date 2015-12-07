@@ -14,7 +14,9 @@ module.exports = {
 	startListeningToTasks: function(){
 		return function(dispatch,getState){
 			tasksRef.on("value",function(snapshot){
-				var tasks = snapshot.val();
+				var tasks = _.mapValues(snapshot.val(),function(tsk,key){
+					return Object.assign({".key":key},tsk);
+				});
 				dispatch({ type: C.LOADED_ALL_TASKS, tasks:tasks });
 			});
 		}
@@ -35,11 +37,11 @@ module.exports = {
 		return function(dispatch,getState){
 			// and probably spinner here first.
 
-			var newref = tasksRef.child(projectid).push(),
+			var newref = tasksRef.push(),
 				newid = newref.path.o[1],
 				created = Date.now();
 
-			newref.set({title,deadline,description,created},function(error,newref){
+			newref.set({projectid,title,deadline,description,created},function(error,newref){
 				console.log("PUSHED",newid);
 
 				// Probably want to redirect here to task with newid
@@ -47,10 +49,10 @@ module.exports = {
 		}
 	},
 	// To be called when a user clicks the "delete" button
-	deleteTask: function(projectid,taskid){
+	deleteTask: function(taskid){
 		return function(dispatch,getState){
 			// and probably spinner stuff here too
-			tasksRef.child(projectid).child(taskid).remove(function(error){
+			tasksRef.child(taskid).remove(function(error){
 
 			});
 		}

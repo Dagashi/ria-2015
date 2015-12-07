@@ -26,7 +26,7 @@ var Task = React.createClass({
 	removeTask: function(e) {
 		e.preventDefault();
 		if (confirm("This will permanently remove this Task from the database. Are you sure you want to do this?")) {
-			this.props.deleteproject(this.props.params.id);
+			this.props.deleteTask(this.props.task[".key"]);
 		}
 	},
 	render: function(){
@@ -87,8 +87,8 @@ var Task = React.createClass({
 
 var mapDispatchToProps = function(dispatch){
 	return {
-		deleteTask: function(projectid, taskId){
-			dispatch(actions.deleteTask(projectid, taskId));
+		deleteTask: function(taskId){
+			dispatch(actions.deleteTask(taskId));
 		}
 	}
 };
