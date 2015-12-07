@@ -72,13 +72,14 @@ var Task = React.createClass({
 					</Modal>
 
 					<br />
+					Deadline: {this.props.task.deadline}
+					<br />
 					{_.trunc(this.props.task.description, 50)}
 					<br />
 					<small>Created {created.toLocaleDateString()} - {created.toLocaleTimeString()}</small>
 					{edited}
 				</td>
 				<td>
-					<Link to={"/task-edit/"+this.props.task[".key"]} className="btn btn-default btn-xs"><i className="fa fa-pencil"></i></Link>
 					<a href="#" onClick={ this.removeTask.bind(this) } className="btn btn-default btn-xs"><i className="fa fa-trash"></i></a>
 				</td>
 			</tr>
