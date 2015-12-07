@@ -60,6 +60,7 @@ var Task = React.createClass({
 						<Modal.Body>
 							<div>
 								<strong>Title:</strong> {this.props.task.title} <br/>
+								<strong>Deadline:</strong> {this.props.task.deadline}<br/>
 								<strong>Created:</strong> {created.toLocaleDateString()} - {created.toLocaleTimeString()}
 								{edited} <br/>
 								<strong>Description:</strong> <br/>
@@ -85,6 +86,10 @@ var Task = React.createClass({
 	}
 });
 
+var mapStateToProps = function(appstate){
+	return {};
+};
+
 var mapDispatchToProps = function(dispatch){
 	return {
 		deleteTask: function(taskId){
@@ -93,4 +98,4 @@ var mapDispatchToProps = function(dispatch){
 	}
 };
 
-module.exports = ReactRedux.connect(mapDispatchToProps)(Task);
+module.exports = ReactRedux.connect(mapStateToProps,mapDispatchToProps)(Task);
