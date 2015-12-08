@@ -1,2 +1,2 @@
-var createBrowserHistory = require('history/lib/createBrowserHistory');
-module.exports = createBrowserHistory();
+var createHashHistory = require('history/lib/createHashHistory');
+module.exports = createHashHistory();
