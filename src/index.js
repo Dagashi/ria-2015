@@ -9,12 +9,13 @@ var React = require('react'),
 	Provider = require('react-redux').Provider,
 	store = require('./store'),
 	routes = require('./routes'),
-	actions = require('./actions/');
+	actions = require('./actions/'),
+	History = require('./history');
 
 ReactDOM.render(
 	// Wrapping the router in provider so components can `connect` to store using ReactRedux
 	<Provider store={store}>
-		<Router routes={routes}/>
+		<Router routes={routes} history={History} />
 	</Provider>,
 	document.getElementById("root")
 );

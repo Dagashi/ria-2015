@@ -4,7 +4,9 @@ This module contains action creators dealing with `appState.auth`
 
 var C = require("../constants"),
 	Firebase = require("firebase"),
-	fireRef = new Firebase(C.firebaseURL);
+	fireRef = new Firebase(C.firebaseURL),
+	History = require('../history');
+
 
 module.exports = {
 	// called at app start
@@ -39,6 +41,8 @@ module.exports = {
 							uid: authData.uid,
 							username: authData.github.displayName || authData.github.username
 						});
+						//Redirect to dashboard after login
+						History.replaceState(null, '/dashboard');
 					}
 				}
 			});
@@ -48,6 +52,7 @@ module.exports = {
 		return function(dispatch,getState){
 			dispatch({type:C.LOGOUT}); // don't really need to do this, but nice to get immediate feedback
 			fireRef.unauth();
+			//Redirect to login-page after logout
 		}
 	}
 };

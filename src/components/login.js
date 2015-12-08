@@ -5,27 +5,96 @@ var React = require("react"),
 	Link = require("react-router").Link;
 
 var Login = React.createClass({
+	preventDefault: function(e) {
+		e.preventDefault();
+	},
 	render: function(){
 		var p = this.props;
 		var auth = p.auth;
-		switch(auth.currently){
-			case C.LOGGED_IN: return (
-				<div className="login">
-					<span>Logged in as {auth.username}.</span>
-					{' '}<button onClick={p.logoutUser}>Log out</button>
+		var year = new Date().getFullYear();
+		return (
+			<div className="">
+				<a className="hiddenanchor" id="toregister"></a>
+				<a className="hiddenanchor" id="tologin"></a>
+
+				<div id="wrapper">
+					<div id="login" className="animate form">
+						<section className="login_content">
+							<form>
+								<h1>Login Form</h1>
+								<div>
+									<input type="text" className="form-control" placeholder="Username" required="" />
+								</div>
+								<div>
+									<input type="password" className="form-control" placeholder="Password" required="" />
+								</div>
+								<div>
+									<a className="btn btn-default submit" href="#">Log in</a>
+
+									<a className="reset_pass" href="#">Lost your password?</a>
+								</div>
+								<div className="clearfix"></div>
+
+								<div className="separator">
+									Or login using: 
+									<button onClick={p.attemptLogin}>Github</button>
+									<button onClick={this.preventDefault.bind(this)}>Google</button>
+									<button onClick={this.preventDefault.bind(this)}>Facebook</button>
+								</div>
+								<div className="clearfix"></div>
+
+								<div className="separator">
+
+									<p className="change_link">New to site?
+										<a href="#toregister" onClick={ this.preventDefault.bind(this) } className="to_register"> Create Account </a>
+									</p>
+									<div className="clearfix"></div>
+									<br />
+									<div>
+										<h1><i className="fa fa-sitemap"></i> Project Kanri!</h1>
+
+										<p>©{year} All Rights Reserved. Privacy and Terms</p>
+									</div>
+								</div>
+							</form>
+						</section>
+					</div>
+					<div id="register" className="animate form">
+						<section className="login_content">
+							<form>
+								<h1>Create Account</h1>
+								<div>
+									<input type="text" className="form-control" placeholder="Username" required="" />
+								</div>
+								<div>
+									<input type="email" className="form-control" placeholder="Email" required="" />
+								</div>
+								<div>
+									<input type="password" className="form-control" placeholder="Password" required="" />
+								</div>
+								<div>
+									<a className="btn btn-default submit" href="index.html">Submit</a>
+								</div>
+								<div className="clearfix"></div>
+								<div className="separator">
+
+									<p className="change_link">Already a member ?
+										<a href="#tologin" className="to_register"> Log in </a>
+									</p>
+									<div className="clearfix"></div>
+									<br />
+									<div>
+										<h1><i className="fa fa-paw"></i> Gentelella Alela!</h1>
+
+										<p>©{year} All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+									</div>
+								</div>
+							</form>
+						</section>
+					</div>
 				</div>
-			);
-			case C.AWAITING_AUTH_RESPONSE: return (
-				<div className="login">
-					<button disabled><i className="fa fa-spinner fa-spin"></i> authenticating...</button>
-				</div>
-			);
-			default: return (
-				<div className="login">
-					<button onClick={p.attemptLogin}>Log in</button>
-				</div>
-			);
-		}
+			</div>
+		);
 	}
 });
 

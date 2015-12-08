@@ -11,7 +11,8 @@
 		"reactify": "=1.1.1",
 		"react-bootstrap": "=0.27.0",
 		"firebase": "=2.3.1",
-		"reactfire": "=0.5.1"
+		"reactfire": "=0.5.1",
+		"history": "^1.15.0"
 	},
 	"scripts": {
 		"build": "browserify --debug -t [reactify --es6] src/index.js > bundle.js"
