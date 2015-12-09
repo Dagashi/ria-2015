@@ -5,17 +5,31 @@ contained in `this.props.children` and rendered out.
 
 var React = require('react'),
 	ReactRedux = require("react-redux"),
-	C = require("../constants");
+	C = require("../constants"),
+	History = require("react-router").History;
 
 var Sidebar = require("./sidebar");
 var Topnav = require("./topnav");
 
 var Wrapper = React.createClass({
+	mixins: [ History ],
+	componentWillMount: function() {
+		if(this.props.auth.currently != C.LOGGED_IN && ! this.history.isActive("/login/") ) {
+			this.history.replaceState(null, '/login/');
+		}
+	},
 	render: function() {
 		var content = "";
 		
-		//Only show Sidebar and topnav if loggedin
-		if(this.props.auth.currently === "LOGGED_IN") {
+		//Do not show sidebar at login.
+		if(this.history.isActive("/login/")) {
+			content = (
+				<div role="main">
+					{this.props.children}
+				</div>
+			);
+		}
+		else {
 			content = (
 				<div>
 					<Sidebar />
@@ -25,13 +39,6 @@ var Wrapper = React.createClass({
 					<div className="right_col" role="main">
 						{this.props.children}
 					</div>
-				</div>
-			);
-		}
-		else {
-			content = (
-				<div role="main">
-					{this.props.children}
 				</div>
 			);
 		}

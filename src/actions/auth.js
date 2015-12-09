@@ -42,7 +42,7 @@ module.exports = {
 							username: authData.github.displayName || authData.github.username
 						});
 						//Redirect to dashboard after login
-						History.replaceState(null, '/dashboard');
+						History.replaceState(null, '/dashboard/');
 					}
 				}
 			});
