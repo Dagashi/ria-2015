@@ -7,6 +7,8 @@ var React = require('react'),
 	Route = ReactRouter.Route,
 	IndexRoute = ReactRouter.IndexRoute,
 	Redirect = ReactRouter.Redirect,
+	App = require('./components/app'),
+	Start = require('./components/start'),
 	Wrapper = require('./components/wrapper'),
 	Login = require('./components/login'),
 	Home = require('./components/home'),
@@ -16,14 +18,18 @@ var React = require('react'),
 	ProjectEdit = require('./components/projectedit');
 
 module.exports = (
-	<Route path="/" component={Wrapper}>
+	<Route path="/" component={App}>
+		<IndexRoute component={Start}/>
 		<Route path="/login/" component={Login} />
-		<Route path="/dashboard/" component={Home} />
-		<Route path="/projects/">
-			<IndexRoute component={Projects} />
-			<Route path="/project/:id" component={Project} />
-			<Route path="/project-new/" component={ProjectAdd} />
-			<Route path="/project-edit/:id" component={ProjectEdit} />
+
+		<Route path="/dashboard/" component={Wrapper}>
+			<IndexRoute component={Home}/>
+			<Route path="/projects/">
+				<IndexRoute component={Projects} />
+				<Route path="/project/:id" component={Project} />
+				<Route path="/project-new/" component={ProjectAdd} />
+				<Route path="/project-edit/:id" component={ProjectEdit} />
+			</Route>
 		</Route>
 		
 	</Route>

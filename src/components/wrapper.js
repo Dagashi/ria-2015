@@ -14,7 +14,7 @@ var Topnav = require("./topnav");
 var Wrapper = React.createClass({
 	mixins: [ History ],
 	componentWillMount: function() {
-		if(this.props.auth.currently != C.LOGGED_IN && ! this.history.isActive("/login/") ) {
+		if(this.props.auth.currently != C.LOGGED_IN ) {
 			this.history.replaceState(null, '/login/');
 		}
 	},
