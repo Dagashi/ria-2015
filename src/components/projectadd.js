@@ -33,7 +33,7 @@ var ProjectAdd = React.createClass({
 							<div className="x_content">
 								<br />
 								
-								<ProjectForm callback={this.props.addnewproject} uid={this.props.auth.uid} />
+								<ProjectForm callback={this.props.addnewproject} uid={this.props.auth.uid} users={this.props.users} />
 								
 							</div>
 						</div>
@@ -51,7 +51,10 @@ var ProjectAdd = React.createClass({
 
 var mapStateToProps = function(appstate){
 	// This component will have access to `appstate.auth` through `this.props.auth`
-	return {auth:appstate.auth};
+	return {
+		auth:appstate.auth,
+		users: appstate.users
+	};
 };
 
 var mapDispatchToProps = function(dispatch){

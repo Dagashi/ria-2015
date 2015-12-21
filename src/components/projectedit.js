@@ -35,7 +35,7 @@ var ProjectEdit = React.createClass({
 							</div>
 							<div className="x_content">
 								<br />
-									<ProjectForm project={project} callback={this.props.updateproject.bind(this,projectid)} />
+									<ProjectForm project={project} callback={this.props.updateproject.bind(this,projectid)} users={this.props.users} />
 							</div>
 						</div>
 					</div>
@@ -52,7 +52,10 @@ var ProjectEdit = React.createClass({
 
 var mapStateToProps = function(appstate){
 	// This component will have access to `appstate.projects` through `this.props.projects`
-	return {projects:appstate.projects};
+	return {
+		projects:appstate.projects,
+		users: appstate.users
+	};
 };
 
 var mapDispatchToProps = function(dispatch){

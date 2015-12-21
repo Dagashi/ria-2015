@@ -17,7 +17,9 @@ module.exports = {
 					dispatch({
 						type: C.LOGIN_USER,
 						uid: authData.uid,
-						username: authData.github.displayName || authData.github.username
+						username: authData.github.displayName || authData.github.username,
+						email: authData.github.email || null,
+						image: authData.github.profileImageURL || null
 					});
 				} else {
 					if (getState().auth.currently !== C.ANONYMOUS){ // log out if not already logged out
@@ -39,8 +41,17 @@ module.exports = {
 						dispatch({
 							type: C.LOGIN_USER,
 							uid: authData.uid,
-							username: authData.github.displayName || authData.github.username
+							username: authData.github.displayName || authData.github.username,
+							email: authData.github.email || null,
+							image: authData.github.profileImageURL || null
 						});
+
+						//Save the user to the users-list
+						fireRef.child("users").child(authData.uid).set({
+							username: authData.github.displayName || authData.github.username,
+							image: authData.github.profileImageURL || null
+						});
+
 						//Redirect to dashboard after login
 						History.replaceState(null, '/dashboard/');
 					}

@@ -11,5 +11,6 @@ module.exports = {
 		uid: null
 	},
 	projects: {},
-	tasks: {}
+	tasks: {},
+	users: {}
 };
