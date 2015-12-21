@@ -13,7 +13,8 @@ var _ = require("lodash");
 var ProjectsWidget = React.createClass({
 	render: function(){
 		var projects = this.props.projects;
-			rows = _.map(projects,function(p){return <ProjectRow project={p} />}); 	
+		projects = _.filter(projects, 'uid', this.props.auth.uid);
+		var rows = _.map(projects,function(p){return <ProjectRow project={p} />});
 
 		var tooltip = (
 			<Tooltip>Create a new project</Tooltip>
@@ -66,7 +67,10 @@ module.exports = ProjectsWidget;
 
 var mapStateToProps = function(appstate){
 	// This component will have access to `appstate.projects` through `this.props.projects`
-	return {projects:appstate.projects};
+	return {
+		projects:appstate.projects,
+		auth:appstate.auth
+	};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(ProjectsWidget);
