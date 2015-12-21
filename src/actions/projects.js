@@ -7,7 +7,8 @@ These actions are imported by Redux-aware components who need them
 var C = require("../constants"),
 	Firebase = require("firebase"),
 	projectsRef = new Firebase(C.firebaseURL).child("projects"),
-	_ = require("lodash");
+	_ = require("lodash"),
+	History = require('../history');
 
 module.exports = {
 	// called when the app starts
@@ -46,13 +47,14 @@ module.exports = {
 			// and probably spinner here first.
 
 			var newref = projectsRef.push(),
-				newid = newref.path.o[1], // found this out in console.log :P
+				newid = newref.path.o[1],
 				created = Date.now();
 
 			newref.set({uid,title,deadline,description,created},function(error,newref){
 				console.log("PUSHED",newid);
 
-				// Probably want to redirect here to project with newid
+				//Redirect to projects detail page.
+				History.replaceState(null, '/project/'+newid);
 			});
 		}
 	},
