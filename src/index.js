@@ -21,6 +21,7 @@ ReactDOM.render(
 );
 
 setTimeout(function(){
+	store.dispatch( actions.startListeningToUsers());
 	store.dispatch( actions.startListeningToProjects());
 	store.dispatch( actions.startListeningToTasks());
 });
