@@ -28,7 +28,7 @@ var Wrapper = React.createClass({
 
 		return (
 			<div className="main_container">
-				<Sidebar username={this.props.auth.username} logout={this.logout} />
+				<Sidebar username={this.props.auth.username} userimage={this.props.auth.image} logout={this.logout} />
 
 				<Topnav  username={this.props.auth.username} logout={this.logout} />
 

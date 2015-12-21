@@ -56,6 +56,7 @@ var Sidebar = React.createClass({
 		e.preventDefault();
 	},
 	render: function(){
+		console.log("userimage: "+this.props.userimage);
 		return (
 			<div className="col-md-3 left_col">
 				<div className="left_col scroll-view">
@@ -70,7 +71,7 @@ var Sidebar = React.createClass({
 
 					<div className="profile">
 						<div className="profile_pic">
-							<img src="images/anonymous_user_icon.jpg" alt="..." className="img-circle profile_img" />
+							<img src={this.props.userimage} alt="..." className="img-circle profile_img" />
 						</div>
 						<div className="profile_info">
 							<span>Welcome,</span>

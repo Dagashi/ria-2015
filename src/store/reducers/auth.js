@@ -25,7 +25,9 @@ module.exports = function(currentstate,action){
 			return {
 				currently: C.LOGGED_IN,
 				username: action.username,
-				uid: action.uid
+				uid: action.uid,
+				email: action.email,
+				image: action.image
 			};
 		default: return currentstate || initialState.auth;
 	}
