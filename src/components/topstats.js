@@ -2,18 +2,11 @@
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
 
-var Navbar = Bootstrap.Navbar;
-var NavBrand = Bootstrap.NavBrand;
-var Nav = Bootstrap.Nav;
-var NavItem = Bootstrap.NavItem;
-var NavDropdown = Bootstrap.NavDropdown;
-var MenuItem = Bootstrap.MenuItem;
 var OverlayTrigger = Bootstrap.OverlayTrigger;
 var Button = Bootstrap.Button;
-var ButtonToolbar = Bootstrap.ButtonToolbar;
 var Glyphicon = Bootstrap.Glyphicon;
 var Tooltip = Bootstrap.Tooltip;
-var Panel = Bootstrap.Panel;
+
 
 var TopStats = React.createClass({
 	render: function(){
