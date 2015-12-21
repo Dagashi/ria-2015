@@ -23,16 +23,16 @@ var menuStyle = {
 };
 
 const tooltip1 = (
-	<Tooltip>Settings</Tooltip>
+	<Tooltip id="settings">Settings</Tooltip>
 );
 const tooltip2 = (
-	<Tooltip>Fullscreen</Tooltip>
+	<Tooltip id="Fullscreen">Fullscreen</Tooltip>
 );
 const tooltip3 = (
-	<Tooltip>Lock</Tooltip>
+	<Tooltip id="Lock">Lock</Tooltip>
 );
 const tooltip4 = (
-	<Tooltip>Logout</Tooltip>
+	<Tooltip id="Logout">Logout</Tooltip>
 );
 
 var Sidebar = React.createClass({
@@ -74,7 +74,7 @@ var Sidebar = React.createClass({
 						</div>
 						<div className="profile_info">
 							<span>Welcome,</span>
-							<h2>David Strömbom</h2>
+							<h2>{this.props.username}</h2>
 						</div>
 					</div>
 
@@ -84,7 +84,7 @@ var Sidebar = React.createClass({
 						<div className="menu_section">
 							<ul className="nav side-menu">
 								<li>
-									<a href="#" ><i className="fa fa-home"></i> Dashboard </a>
+									<Link to="/dashboard/"><i className="fa fa-home"></i> Dashboard </Link>
 								</li>
 								<li><a href="#" onClick={ this.eventHandler.bind(this, 1) } ><i className="fa fa-briefcase"></i> Projects <span className="fa fa-chevron-down"></span></a>
 									<Panel collapsible expanded={this.state.menuProjectsOpen}>
@@ -139,7 +139,7 @@ var Sidebar = React.createClass({
 							</Button>
 						</OverlayTrigger>
 						<OverlayTrigger placement="top" overlay={tooltip4}>
-							<Button bsStyle="default" href="#">
+							<Button bsStyle="default" href="#" onClick={ this.props.logout } >
 								<Glyphicon glyph="off" />
 							</Button>
 						</OverlayTrigger>

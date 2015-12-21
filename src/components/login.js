@@ -32,14 +32,14 @@ var Login = React.createClass({
 									<a className="btn btn-default btn-lg submit pull-left" href="#">Log in</a>
 									Or login using: 
 									<a href="#/login/" onClick={p.attemptLogin} title="Login with a Github account"><i className="fa fa-github"></i></a>
-									<a href="#/login/" onClick={this.preventDefault.bind(this)} title="Login with a Google account"><i className="fa fa-google"></i></a>
-									<a href="#/login/" onClick={this.preventDefault.bind(this)} title="Login with a Facebook account"><i className="fa fa-facebook"></i></a>
+									<a href="#/login/" onClick={this.preventDefault} title="Login with a Google account"><i className="fa fa-google"></i></a>
+									<a href="#/login/" onClick={this.preventDefault} title="Login with a Facebook account"><i className="fa fa-facebook"></i></a>
 								</div>
 								<div className="clearfix"></div>
 
 								<div className="separator">
 									<p className="change_link">New to site?
-										<a href="#toregister" onClick={ this.preventDefault.bind(this) } className="to_register"> Create Account </a>
+										<a href="#toregister" onClick={ this.preventDefault } className="to_register"> Create Account </a>
 									</p>
 									<div className="clearfix"></div>
 									<br />

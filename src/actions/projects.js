@@ -41,7 +41,7 @@ module.exports = {
 		}
 	},
 	// To be called when a user submits a new project
-	addNewProject: function(title,deadline,description){
+	addNewProject: function(uid,title,deadline,description){
 		return function(dispatch,getState){
 			// and probably spinner here first.
 
@@ -49,7 +49,7 @@ module.exports = {
 				newid = newref.path.o[1], // found this out in console.log :P
 				created = Date.now();
 
-			newref.set({title,deadline,description,created},function(error,newref){
+			newref.set({uid,title,deadline,description,created},function(error,newref){
 				console.log("PUSHED",newid);
 
 				// Probably want to redirect here to project with newid

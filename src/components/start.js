@@ -10,7 +10,7 @@ var Start = React.createClass({
 			<div className="">
 				<div id="wrapper">
 					<h1>Project Kanri!</h1>
-					More informaion will come soon.<br />
+					More information will come soon.<br /><br />
 					<Link to="/login/" className="btn btn-default">Go to login-page.</Link>
 				</div>
 			</div>

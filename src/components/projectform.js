@@ -4,11 +4,13 @@ var Bootstrap = require('react-bootstrap');
 var Alert = Bootstrap.Alert;
 
 var ProjectForm = React.createClass({
-	submit: function(){
+	submit: function(e) {
+		e.preventDefault();
 		var title = this.refs.title.value;
 		var deadline = this.refs.deadline.value;
 		var desc = this.refs.description.value;
-		this.props.callback(title,deadline,desc);
+		var uid = this.props.uid;
+		this.props.callback(uid,title,deadline,desc);
 	},
 	render: function(){
 		var project = this.props.project || {};

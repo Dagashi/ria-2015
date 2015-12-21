@@ -53,6 +53,7 @@ module.exports = {
 			dispatch({type:C.LOGOUT}); // don't really need to do this, but nice to get immediate feedback
 			fireRef.unauth();
 			//Redirect to login-page after logout
+			History.replaceState(null, '/login/');
 		}
 	}
 };

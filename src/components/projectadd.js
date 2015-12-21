@@ -33,7 +33,7 @@ var ProjectAdd = React.createClass({
 							<div className="x_content">
 								<br />
 								
-								<ProjectForm callback={this.props.addnewproject} />
+								<ProjectForm callback={this.props.addnewproject} uid={this.props.auth.uid} />
 								
 							</div>
 						</div>
@@ -50,14 +50,14 @@ var ProjectAdd = React.createClass({
 // now we connect the component to the Redux store:
 
 var mapStateToProps = function(appstate){
-	// this component doesn't need any data from app state
-	return {};
+	// This component will have access to `appstate.auth` through `this.props.auth`
+	return {auth:appstate.auth};
 };
 
 var mapDispatchToProps = function(dispatch){
 	return {
-		addnewproject: function(title,deadline,desc){
-			dispatch(actions.addNewProject(title,deadline,desc));
+		addnewproject: function(uid,title,deadline,desc){
+			dispatch(actions.addNewProject(uid,title,deadline,desc));
 		}
 	}
 };

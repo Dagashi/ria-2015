@@ -6,6 +6,7 @@ contained in `this.props.children` and rendered out.
 var React = require('react'),
 	ReactRedux = require("react-redux"),
 	C = require("../constants"),
+	actions = require("../actions"),
 	History = require("react-router").History;
 
 var Sidebar = require("./sidebar");
@@ -18,33 +19,22 @@ var Wrapper = React.createClass({
 			this.history.replaceState(null, '/login/');
 		}
 	},
+	logout: function(e) {
+		e.preventDefault();
+		this.props.logoutUser();
+	},
 	render: function() {
 		var content = "";
-		
-		//Do not show sidebar at login.
-		if(this.history.isActive("/login/")) {
-			content = (
-				<div role="main">
-					{this.props.children}
-				</div>
-			);
-		}
-		else {
-			content = (
-				<div>
-					<Sidebar />
 
-					<Topnav />
-
-					<div className="right_col" role="main">
-						{this.props.children}
-					</div>
-				</div>
-			);
-		}
 		return (
 			<div className="main_container">
-				{content}
+				<Sidebar username={this.props.auth.username} logout={this.logout} />
+
+				<Topnav  username={this.props.auth.username} logout={this.logout} />
+
+				<div className="right_col" role="main">
+					{this.props.children}
+				</div>
 			</div>
 		);
 	}
@@ -56,4 +46,10 @@ var mapStateToProps = function(appstate){
 	return {auth:appstate.auth};
 };
 
-module.exports = ReactRedux.connect(mapStateToProps)(Wrapper);
+var mapDispatchToProps = function(dispatch){
+	return {
+		logoutUser: function(){ dispatch(actions.logoutUser()); }
+	}
+};
+
+module.exports = ReactRedux.connect(mapStateToProps,mapDispatchToProps)(Wrapper);
