@@ -37,6 +37,9 @@ module.exports = {
 				*/
 				return Object.assign(currentstatus,{title,deadline,description}); // we don't want to overwrite created etc
 			},function(error){
+				//Redirect to projects detail page.
+				History.replaceState(null, '/project/'+projectid);
+				
 				// TODO - dispatch new action here to stop spinner. And probably show error if there was any.
 			});
 		}

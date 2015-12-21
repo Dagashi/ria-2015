@@ -9,8 +9,13 @@ var ProjectForm = React.createClass({
 		var title = this.refs.title.value;
 		var deadline = this.refs.deadline.value;
 		var desc = this.refs.description.value;
-		var uid = this.props.uid;
-		this.props.callback(uid,title,deadline,desc);
+		if(this.props.uid) {
+			var uid = this.props.uid;
+			this.props.callback(uid,title,deadline,desc);
+		}
+		else {
+			this.props.callback(title,deadline,desc);
+		}
 	},
 	render: function(){
 		var project = this.props.project || {};
