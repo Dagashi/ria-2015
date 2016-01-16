@@ -12,7 +12,9 @@
 		"react-bootstrap": "=0.27.0",
 		"firebase": "=2.3.1",
 		"reactfire": "=0.5.1",
-		"history": "^1.15.0"
+		"history": "^1.15.0",
+		"jquery": "=2.2.0",
+		"jquery-ui": "=1.10.5"
 	},
 	"scripts": {
 		"build": "browserify --debug -t [reactify --es6] src/index.js > bundle.js"
