@@ -59,8 +59,8 @@ var mapStateToProps = function(appstate){
 
 var mapDispatchToProps = function(dispatch){
 	return {
-		addnewproject: function(uid,title,deadline,desc){
-			dispatch(actions.addNewProject(uid,title,deadline,desc));
+		addnewproject: function(uid,title,deadline,budget,desc){
+			dispatch(actions.addNewProject(uid,title,deadline,budget,desc));
 		}
 	}
 };

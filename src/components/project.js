@@ -57,8 +57,8 @@ var Project = React.createClass({
 
 									<ul className="stats-overview">
 										<li>
-											<span className="name"> Estimated budget </span>
-											<span className="value text-success"> 200 </span>
+											<span className="name"> Budget </span>
+											<span className="value text-success"> { project.budget / 60 } Hours </span>
 										</li>
 										<li>
 											<span className="name"> Total amount spent </span>

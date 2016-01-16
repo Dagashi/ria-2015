@@ -12,3 +12,7 @@
     display: block;
     clear: both;
 }
+
+.input-group[class*=col-] {
+	padding-right: 10px;
+}

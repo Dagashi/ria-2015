@@ -60,8 +60,8 @@ var mapStateToProps = function(appstate){
 
 var mapDispatchToProps = function(dispatch){
 	return {
-		updateproject: function(projectid,title,deadline,desc){
-			dispatch(actions.submitProjectUpdate(projectid,title,deadline,desc));
+		updateproject: function(projectid,title,deadline,budget,desc){
+			dispatch(actions.submitProjectUpdate(projectid,title,deadline,budget,desc));
 		}
 	}
 };

@@ -24,7 +24,7 @@ module.exports = {
 	},
 
 	// To be called when a user clicks a "submit" button in an edit field
-	submitProjectUpdate: function(projectid,title,deadline,description){
+	submitProjectUpdate: function(projectid,title,deadline,budget,description){
 		return function(dispatch,getState){
 			// TODO - dispatch an action here that sets a spinner or something so the user knows he's waiting
 			projectsRef.child(projectid).transaction(function(currentstatus){
@@ -35,7 +35,7 @@ module.exports = {
 				currentstatus.description = description;
 				return currentstatus;
 				*/
-				return Object.assign(currentstatus,{title,deadline,description}); // we don't want to overwrite created etc
+				return Object.assign(currentstatus,{title,deadline,budget,description}); // we don't want to overwrite created etc
 			},function(error){
 				//Redirect to projects detail page.
 				History.replaceState(null, '/project/'+projectid);
@@ -45,7 +45,7 @@ module.exports = {
 		}
 	},
 	// To be called when a user submits a new project
-	addNewProject: function(uid,title,deadline,description){
+	addNewProject: function(uid,title,deadline,budget,description){
 		return function(dispatch,getState){
 			// and probably spinner here first.
 
@@ -53,7 +53,7 @@ module.exports = {
 				newid = newref.path.o[1],
 				created = Date.now();
 
-			newref.set({uid,title,deadline,description,created},function(error,newref){
+			newref.set({uid,title,deadline,budget,description,created},function(error,newref){
 				console.log("PUSHED",newid);
 
 				//Redirect to projects detail page.
